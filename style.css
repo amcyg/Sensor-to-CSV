@@ -1,0 +1,9 @@
+#no {
+	display: none;
+}
+
+body {
+	text-align: center;
+	font-family: Arial;
+	width: device-width;
+}
