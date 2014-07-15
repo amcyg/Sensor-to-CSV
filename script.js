@@ -1,7 +1,7 @@
 // Set up data collection with column titles and dummy data
 var sensorData = [];
-sensorData.push(['x', 'y', 'z', 'alpha', 'beta', 'gamma']); 
-sensorData.push([1.2234, 4.3478, 8.32478, 20.27893, 4.387892, 1.78923]); 
+sensorData.push(['milliseconds', 'x', 'y', 'z', 'alpha', 'beta', 'gamma']); 
+sensorData.push([0, 1.2234, 4.3478, 8.32478, 20.27893, 4.387892, 1.78923]); 
 
 $("#timer").click(function(){
 	var started = $(this).data('started');
@@ -10,6 +10,7 @@ $("#timer").click(function(){
 	// Start tracking when user clicks start button
 	if(!started){
 		gyro.frequency = 10; // 10 ms = 100 Hz
+		milliseconds = 0;
 		gyro.startTracking(function(o) {
 			// o.x, o.y, o.z for accelerometer
 			// o.alpha, o.beta, o.gamma for gyro
@@ -20,7 +21,8 @@ $("#timer").click(function(){
 				+ "alpha: " + o.alpha + "<br/>" 
 				+ "beta: " + o.beta + "<br/>" 
 				+ "gamma: " + o.gamma;
-			sensorData.push([o.x, o.y, o.z, o.alpha, o.beta, o.gamma]);
+			sensorData.push([milliseconds, o.x, o.y, o.z, o.alpha, o.beta, o.gamma]);
+			milliseconds = milliseconds + gyro.frequency;
 		});
 		$(this).data('started', true).prop('value', 'Stop');
 		}
