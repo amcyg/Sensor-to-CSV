@@ -9,19 +9,22 @@ $("#timer").click(function(){
 
 	// Start tracking when user clicks start button
 	if(!started){
-		// Set frequency in ms (10 ms = 100 Hz)
-		gyro.frequency = 10;
+		gyro.frequency = 10; // 10 ms = 100 Hz
 		gyro.startTracking(function(o) {
 			// o.x, o.y, o.z for accelerometer
 			// o.alpha, o.beta, o.gamma for gyro
-			document.getElementById("data").innerHTML = "x: " + o.x + "<br/>" + "y: " + o.y + "<br/>" + "z: " + o.z 
-															+ "<br/>" + "alpha: " + o.alpha + "<br/>" + "beta: " + o.beta + "<br/>" + "gamma: " + o.gamma;
+			document.getElementById("data").innerHTML = "x: " + o.x + "<br/>" 
+														+ "y: " + o.y + "<br/>" 
+														+ "z: " + o.z + "<br/>" 
+														+ "alpha: " + o.alpha + "<br/>" 
+														+ "beta: " + o.beta + "<br/>" 
+														+ "gamma: " + o.gamma;
 			sensorData.push([o.x, o.y, o.z, o.alpha, o.beta, o.gamma]);
 		});
 		$(this).data('started', true).prop('value', 'Stop');
 		}
+	// Stop tracking when user clicks stop button	
 	else {
-		// Stop tracking when user clicks stop button
 		gyro.stopTracking();
 		$(this).data('started', false).prop('value', 'Download');
 		console.log(sensorData);
@@ -30,8 +33,6 @@ $("#timer").click(function(){
 		var csvData = "data:text/csv;charset=utf-8,";
 		sensorData.forEach(function(infoArray, index){
 			dataString = infoArray.join(",");
-			//csvData += index < infoArray.length ? dataString + "\n" : dataString; 
-			//console.log(dataString);
 			csvData += index < sensorData.length ? dataString + "\n" : dataString; 
 		});
 
