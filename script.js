@@ -13,12 +13,13 @@ $("#timer").click(function(){
 		gyro.startTracking(function(o) {
 			// o.x, o.y, o.z for accelerometer
 			// o.alpha, o.beta, o.gamma for gyro
-			document.getElementById("data").innerHTML = "x: " + o.x + "<br/>" 
-														+ "y: " + o.y + "<br/>" 
-														+ "z: " + o.z + "<br/>" 
-														+ "alpha: " + o.alpha + "<br/>" 
-														+ "beta: " + o.beta + "<br/>" 
-														+ "gamma: " + o.gamma;
+			document.getElementById("data").innerHTML = 
+				"x: " + o.x + "<br/>" 
+				+ "y: " + o.y + "<br/>" 
+				+ "z: " + o.z + "<br/>" 
+				+ "alpha: " + o.alpha + "<br/>" 
+				+ "beta: " + o.beta + "<br/>" 
+				+ "gamma: " + o.gamma;
 			sensorData.push([o.x, o.y, o.z, o.alpha, o.beta, o.gamma]);
 		});
 		$(this).data('started', true).prop('value', 'Stop');
